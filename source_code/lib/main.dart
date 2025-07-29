@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +32,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  List<String> formats = setPredefinedFormats();
-  List<String> formatNames = setPredefinedFormatNames();
+List<String> formats = [];
+List<String> formatNames = [];
+
   late List<DropdownMenuEntry<String>> formatEntry;
   List<Widget> fields = [];
   String outputText = "";
@@ -45,6 +47,7 @@ class _MyHomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    loadFormats();
     formatEntry = buildDropdownEntries();
   }
 
@@ -54,6 +57,27 @@ class _MyHomePageState extends State<HomePage> {
         DropdownMenuEntry(label: formatNames[i], value: i.toString())
     ];
   }
+
+  Future<void> loadFormats() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Get saved formats and names or fallback to default
+    formats = prefs.getStringList('formats') ?? [
+      "Nama Shivaya,\n\nWorkDone:\n<field1>\n\nWork Planned:\n<field2>\n\nRegards,\n<field3>",
+    ];
+
+    formatNames = prefs.getStringList('formatNames') ?? ["Amfoss Default"];
+    
+    formatEntry = buildDropdownEntries();
+    setState(() {}); // Refresh UI
+  }
+
+  Future<void> saveFormats() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('formats', formats);
+    await prefs.setStringList('formatNames', formatNames);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -205,13 +229,14 @@ class _MyHomePageState extends State<HomePage> {
             child: const Text("Cancel"),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (nameController.text.isNotEmpty && formatController.text.isNotEmpty) {
                 setState(() {
                   formatNames.add(nameController.text);
                   formats.add(formatController.text);
                   formatEntry = buildDropdownEntries();
                 });
+                await saveFormats();
                 Navigator.pop(context);
               }
             },
@@ -222,6 +247,9 @@ class _MyHomePageState extends State<HomePage> {
     );
   }
 }
+
+
+
 
 // Utility Methods
 
