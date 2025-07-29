@@ -1,9 +1,11 @@
-#  StatusBee 
-<img width="128" height="128" alt="app_icon" src="https://github.com/user-attachments/assets/8f9d58d3-5665-4d03-ba3c-afc0ce454140" />
+<p align="center">
+  <img width="128" height="128" alt="app_icon" src="https://github.com/user-attachments/assets/8f9d58d3-5665-4d03-ba3c-afc0ce454140" />
+</p>
+
+# StatusBee
 
 **StatusBee** is a simple and efficient Flutter app for generating structured daily status updates.  
 It’s designed for professionals, teams, and individuals to communicate progress clearly and consistently.
-
 
 ## ✨ Features
 
