@@ -1,2 +1,20 @@
-# StatusBee
-StatusBee is a simple and efficient tool for creating structured daily status updates. Choose from predefined templates or add your own, fill in the required fields, and instantly generate clean, shareable summaries. Designed for professionals, teams, and individuals who want to communicate progress clearly and consistently.
+# 🐝 StatusBee 🐝
+
+**StatusBee** is a simple and efficient Flutter app for generating structured daily status updates.  
+It’s designed for professionals, teams, and individuals to communicate progress clearly and consistently.
+
+## ✨ Features
+
+- 📄 Predefined templates for common status formats
+- ➕ Option to add custom templates with placeholders (`<field1>`, `<field2>`, etc.)
+- 🧾 Live preview of formatted output as you type
+- 📋 One-tap copy to clipboard
+- 🔄 Automatically generates the correct number of input fields based on the selected template
+
+## 🚀 Getting Started
+
+Clone the repo and run the app using Flutter:
+
+```bash
+flutter pub get
+flutter run
